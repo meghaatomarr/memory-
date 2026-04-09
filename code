@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Memory Lane 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 40px;
+            padding: 50px;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3);
+            border: 4px solid #ffb6d9;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .title {
+            font-size: 48px;
+            background: linear-gradient(135deg, #ff1493, #ff69b4, #ffb6d9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .emoji-header {
+            font-size: 80px;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+            letter-spacing: 10px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        .subtitle {
+            font-size: 22px;
+            color: #ff69b4;
+            font-weight: bold;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #ff69b4, #ffb6d9);
+            top: 0;
+        }
+
+        .timeline-item {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .content {
+            margin-left: 0;
+            margin-right: auto;
+            width: 48%;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .content {
+            margin-left: auto;
+            margin-right: 0;
+            width: 48%;
+            text-align: left;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            border: 4px solid white;
+            border-radius: 50%;
+            top: 20px;
+            z-index: 10;
+            box-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.2); }
+        }
+
+        .content {
+            background: linear-gradient(135deg, #ffe5f0, #fff0f5);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid #ffb6d9;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+            transition: all 0.3s ease;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.4);
+        }
+
+        .date {
+            font-size: 16px;
+            color: #ff69b4;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .memory-title {
+            font-size: 22px;
+            color: #d63384;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .memory-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .memory-emoji {
+            font-size: 32px;
+            margin-top: 15px;
+            letter-spacing: 8px;
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, #ffd6e8, #c7ceea);
+            border-radius: 20px;
+            border: 3px solid #ffb6d9;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            color: #ff1493;
+            font-weight: bold;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #ff69b4;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .gallery-item {
+            background: linear-gradient(135deg, #ffe5f0, #ffd6e8);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #ffb6d9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
+        }
+
+        .gallery-emoji {
+            font-size: 60px;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .gallery-title {
+            font-size: 18px;
+            color: #d63384;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .gallery-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Love Letter */
+        .love-letter {
+            background: linear-gradient(135deg, #fff8f3, #ffe4f0);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 3px dashed #ff69b4;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .letter-emoji {
+            font-size: 60px;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+            letter-spacing: 10px;
+        }
+
+        .letter-text {
+            font-size: 18px;
+            color: #d63384;
+            line-height: 1.8;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Comic Sans MS', cursive;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.12);
+            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #b5ead7, #88d8b0);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            transform: scale(1.12);
+            box-shadow: 0 15px 40px rgba(136, 216, 176, 0.5);
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .falling-heart {
+            position: fixed;
+            font-size: 40px;
+            opacity: 0.8;
+            animation: heart-fall 3s linear forwards;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        @keyframes heart-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item:nth-child(odd) .content,
+            .timeline-item:nth-child(even) .content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+                text-align: left !important;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .title {
+                font-size: 36px;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="emoji-header">💕📸✨</div>
+            <div class="title">OUR MEMORY LANE</div>
+            <div class="subtitle">~ Every Moment With You Is Special ~</div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number">365</div>
+                <div class="stat-label">Days Together</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Love for You</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Memories Made</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">💯</div>
+                <div class="stat-label">Worth It</div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="content">
+                    <div class="date">📅 First Meeting</div>
+                    <div class="memory-title">The Beginning of Everything</div>
+                    <div class="memory-description">
+                        The day I saw you for the first time, my heart knew it had found its home. That moment changed everything! 💕
+                    </div>
+                    <div class="memory-emoji">🌟✨💫</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="content">
+                    <div class="date">📅 First Date</div>
+                    <div class="memory-title">Butterflies & Smiles</div>
+                    <div class="memory-description">
+                        Nervous, excited, and completely mesmerized by your smile. That night I knew you were the one for me! 🌹
+                    </div>
+                    <div class="memory-emoji">🍽️💑🌙</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="content">
+                    <div class="date">📅 First Kiss</div>
+                    <div class="memory-title">My Heart Stopped</div>
+                    <div class="memory-description">
+                        That kiss was everything I dreamed of and more. Time stood still and I felt like I was floating! 💋
+                    </div>
+                    <div class="memory-emoji">💋✨🌹</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="content">
+                    <div class="date">📅 Adventure Time</div>
+                    <div class="memory-title">Exploring the World Together</div>
+                    <div class="memory-description">
+                        Every trip, every moment of laughter, every sunset we watched together made my love for you grow stronger! 🌍
+                    </div>
+                    <div class="memory-emoji">✈️🏖️🗻</div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="content">
+                    <div class="date">📅 Forever Promise</div>
+                    <div class="memory-title">With You, Always</div>
+                    <div class="memory-description">
+                        I promise to love you, cherish you, and make every moment count. You're my forever person! 💍
+                    </div>
+                    <div class="memory-emoji">💒💎👰</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery -->
+        <h2 style="text-align: center; color: #d63384; margin: 50px 0 30px; font-size: 32px;">✨ Special Moments ✨</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <div class="gallery-emoji">😂</div>
+                <div class="gallery-title">Your Laugh</div>
+                <div class="gallery-desc">The most beautiful sound in the world. It makes my heart so happy! 💕</div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-emoji">🤗</div>
+                <div class="gallery-title">Your Hugs</div>
+                <div class="gallery-desc">Your arms are my safe place. Nothing feels better than being held by you.</div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-emoji">👀</div>
+                <div class="gallery-title">Your Eyes</div>
+                <div class="gallery-desc">I can see forever in your beautiful eyes. They're so full of love! ✨</div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-emoji">💪</div>
+                <div class="gallery-title">Your Strength</div>
+                <div class="gallery-desc">You inspire me every day. Your courage amazes me!</div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-emoji">🎶</div>
+                <div class="gallery-title">Your Voice</div>
+                <div class="gallery-desc">When you whisper my name, it's like the most beautiful melody. 🎵</div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="gallery-emoji">❤️</div>
+                <div class="gallery-title">Your Love</div>
+                <div class="gallery-desc">Your love is the greatest gift I've ever received. Forever grateful! 💕</div>
+            </div>
+        </div>
+
+        <!-- Love Letter -->
+        <div class="love-letter">
+            <div class="letter-emoji">💌📝✨</div>
+            <div class="letter-text">
+                "In this lifetime and all the ones to come, I choose you. <br><br>
+                You are my greatest adventure, my sweetest dream, <br>
+                and my forever person. I love you more than words could ever say. <br><br>
+                You make me a better person just by existing. <br>
+                Thank you for being my everything. 💕"
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+            <button class="btn btn-primary" onclick="celebration()">💕 Make It Special 💕</button>
+            <button class="btn btn-secondary" onclick="shareMemories()">📱 Share These Moments</button>
+        </div>
+    </div>
+
+    <script>
+        function celebration() {
+            createConfetti();
+            createHeartRain();
+            alert('💕 You are loved so much! Forever and always! 💕');
+        }
+
+        function shareMemories() {
+            const text = "Check out our beautiful memory lane! 💕 Made with love!";
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Our Memory Lane',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                alert('Share this special moment: ' + text);
+            }
+        }
+
+        function createConfetti() {
+            const colors = ['#ff69b4', '#ffb6d9', '#ffd6e8', '#ffe4e1', '#b5ead7'];
+            
+            for (let i = 0; i < 80; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                
+                document.body.appendChild(confetti);
+                
+                let top = -10;
+                const speed = Math.random() * 5 + 3;
+                const drift = Math.random() * 400 - 200;
+                
+                const interval = setInterval(() => {
+                    top += speed;
+                    confetti.style.top = top + 'px';
+                    confetti.style.left = (parseFloat(confetti.style.left) + drift / 100) + 'px';
+                    confetti.style.opacity = Math.max(0, 1 - (top / window.innerHeight));
+                    
+                    if (top > window.innerHeight) {
+                        clearInterval(interval);
+                        confetti.remove();
+                    }
+                }, 30);
+            }
+        }
+
+        function createHeartRain() {
+            const hearts = ['💕', '💖', '💗', '💝', '💓', '💞'];
+            
+            for (let i = 0; i < 40; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'falling-heart';
+                heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '-50px';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(heart);
+
+                setTimeout(() => heart.remove(), 8000);
+            }
+        }
+    </script>
+
+</body>
+</html>
